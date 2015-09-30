@@ -4,6 +4,10 @@ import ru.algorithms.Util;
 
 import java.util.Arrays;
 
+
+/**
+ * O(N*N)
+ */
 public class BubbleSort {
 
     public static void main(String[] args) {
