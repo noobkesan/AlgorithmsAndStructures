@@ -14,10 +14,19 @@ public class Util {
         return array;
     }
 
+    /**
+     * @return default array with size 10 and values up to 100
+     */
     public static int[] defaultArray() {
         return generateRandomArray(10, 100);
     }
 
+    /**
+     * Swaps array's values with define indexes
+     * @param array array
+     * @param first first index
+     * @param second second index
+     */
     public static void swap(int[] array, int first, int second) {
         int temp = array[first];
         array[first] = array[second];
