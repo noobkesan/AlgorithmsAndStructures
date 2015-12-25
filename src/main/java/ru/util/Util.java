@@ -1,4 +1,4 @@
-package ru.algorithms;
+package ru.util;
 
 import java.util.Random;
 

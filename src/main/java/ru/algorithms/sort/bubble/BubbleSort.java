@@ -1,6 +1,6 @@
 package ru.algorithms.sort.bubble;
 
-import ru.algorithms.Util;
+import ru.util.Util;
 
 import java.util.Arrays;
 
