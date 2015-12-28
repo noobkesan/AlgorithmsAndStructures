@@ -1,15 +1,18 @@
 package ru.structures.tree.binary;
 
-import ru.util.Util;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.structures.tree.Tree;
+import ru.util.Util;
 
 public class BinaryTree implements Tree {
+    private static final Logger logger = LoggerFactory.getLogger(BinaryTree.class);
     private Node root;
 
     @Override
     public void find(int key) {
         if(root == null) {
-            System.out.println("Tree is empty!");
+            logger.info("Tree is empty!");
             return;
         }
 
@@ -18,12 +21,12 @@ public class BinaryTree implements Tree {
         while ((data = current.data) != key) {
             current = key < data ? current.leftChild : current.rightChild;
             if(current == null) {
-                System.out.println("key not found!");
+                logger.info("Node with key {} not found!", key);
                 return;
             }
         }
 
-        System.out.println("key found in node with id = " + current.id);
+        logger.info("Node with key {} found. Node id {}", key, current.id);
     }
 
     @Override
@@ -52,7 +55,7 @@ public class BinaryTree implements Tree {
                     }
 
                 } else {
-                    System.out.println("Node with key = " + key + " already exists");
+                    logger.info("Node with key {} already exists", key);
                     break;
                 }
             }
@@ -62,23 +65,27 @@ public class BinaryTree implements Tree {
     @Override
     public void delete(int key) {
         if(root == null) {
-            System.out.println("Tree is empty!");
+            logger.info("There is nothing to delete. Tree is empty.");
             return;
         }
 
         Node current = root;
         Node parent = root;
         int data;
+
+        // Searching node to delete
         while ((data = current.data) != key) {
             parent = current;
             current = key < data ? current.leftChild : current.rightChild;
+
+            // Node is not found - return
             if(current == null) {
-                System.out.println("key not found!");
+                logger.info("Key {} not found!", key);
                 return;
             }
         }
 
-        System.out.println("key found in node with id = " + current.id);
+        logger.info("Key {} found in node with id ", key, current.id);
         boolean leftIsNull = current.leftChild == null;
         boolean rightIsNull = current.rightChild == null;
         boolean isLeftChild = parent.leftChild == current;
@@ -95,6 +102,20 @@ public class BinaryTree implements Tree {
         //Both not null
         } else {
 
+            // Successor search
+            Node replacer = current.rightChild;
+            while(true) {
+                if(replacer.leftChild == null) break;
+                replacer = replacer.leftChild;
+            }
+
+            if(replacer == current.rightChild) {
+                setParentChild(parent, false, current.rightChild);
+            } else {
+                if(replacer.rightChild == null) {
+//                    setParentChild(parent, );
+                }
+            }
         }
     }
 
@@ -108,7 +129,7 @@ public class BinaryTree implements Tree {
         if(root != null) {
             root.print(0);
         } else {
-            System.out.println("Empty tree!");
+            logger.info("Empty tree! Nothing to print");
         }
     }
 
