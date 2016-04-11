@@ -1,4 +1,4 @@
-package ru.algorithms.sort.shell;
+package ru.algorithms.sort;
 
 import ru.util.Util;
 
